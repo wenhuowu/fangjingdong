@@ -1,0 +1,102 @@
+.header {
+  width: 100%;
+  height: 202px;
+  background: url("../images/index-bg.png") no-repeat 0 0;
+  background-size: contain;
+}
+.header-content {
+  position: fixed;
+  background-color: rgb(199, 26, 26);
+  top: 0;
+  width: 100%;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+.header-content .herder-icon {
+  height: 100%;
+  width: 40px;
+  background: url("../images/s-btn.png") no-repeat 15px 14px;
+  background-size: 20px, 18px;
+}
+
+.header-content .herder-middle {
+  float: left;
+  width: 280px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.herder-serch {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 15px;
+  height: 28px;
+  line-height: 28%;
+}
+.herder-serch .jd-icon {
+  position: absolute;
+  left: 0;
+  width: 43px;
+  height: 60%;
+  background: url(../images/jd.png) no-repeat center center;
+  background-size: 20px 15px;
+}
+.jd-icon::after {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 6px;
+  display: block;
+  width: 1px;
+  height: 15px;
+  background-color: #ccc;
+}
+
+.herder-serch .jd-serch {
+  position: absolute;
+  top: 15px;
+  left: 50px;
+  width: 16px;
+  height: 60%;
+  background: url(../images/jd-sprites.png) no-repeat -81px 0;
+  background-size: 200px auto;
+}
+.herder-serch .input {
+  -web-kit-appearance: none;
+  -moz-appearance: none;
+  outline: 0;
+  font-size: 14px;
+  color: #6a6f77;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 70%;
+}
+.header-content .herder-login {
+  width: 40px;
+  padding-right: 5px;
+  font-size: 16px;
+  color: #fff;
+}
+.herder-login img {
+  width: 30px;
+}
+
+.ad {
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  width: 95%;
+  height: 99px;
+  margin: 5px auto;
+}
+.ad a {
+  flex: 1;
+}
+.ad a img {
+  width: 100%;
+}
