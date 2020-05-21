@@ -11,7 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  overflow: scroll;
+  // overflow: scroll;
   cursor: pointer !important;
   margin: 0 auto;
   -webkit-overflow-scrolling: touch;

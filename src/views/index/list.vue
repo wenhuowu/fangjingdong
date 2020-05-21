@@ -104,7 +104,7 @@ export default {
     },
     //获取分类
     async getclassify(index) {
-      const result = await this.$http.get("/api/classify", { params: { type: index } });
+      const result = await this.$http.get("/classify", { params: { type: index } });
       this.tags = result.data;
     },
     //添加到购物车

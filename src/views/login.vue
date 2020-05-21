@@ -1,7 +1,11 @@
 <template>
   <div class="register">
-    <img class="img" src="https://file.xdclass.net/video/2020/aliyun-3%E6%9C%88/%E8%BD%AE%E6%92%AD%E5%9B%BE.png" alt="" />
-    <cube-form :model="model" :schema="schema" @submit="submitHandler"> </cube-form>
+    <img
+      class="img"
+      src="https://file.xdclass.net/video/2020/aliyun-3%E6%9C%88/%E8%BD%AE%E6%92%AD%E5%9B%BE.png"
+      alt
+    />
+    <cube-form :model="model" :schema="schema" @submit="submitHandler"></cube-form>
   </div>
 </template>
 
@@ -11,7 +15,7 @@ export default {
     return {
       model: {
         username: "",
-        password: "",
+        password: ""
       },
       schema: {
         fields: [
@@ -21,19 +25,19 @@ export default {
             modelKey: "username",
             label: "用户名",
             props: {
-              placeholder: "用户名：jingdong",
+              placeholder: "用户名：jingdong"
             },
             rules: {
               required: true,
               min: 3,
-              max: 15,
+              max: 15
             },
             trigger: "blur",
             messages: {
               required: "用户名不能为空",
               min: "用户名不能少于3个字符",
-              max: "用户名大于15个字符",
-            },
+              max: "用户名大于15个字符"
+            }
           },
           //密码
           {
@@ -44,30 +48,30 @@ export default {
               placeholder: "密码：123456",
               type: "password",
               eye: {
-                open: false,
-              },
+                open: false
+              }
             },
             rules: {
-              required: true,
+              required: true
             },
             trigger: "blur",
             messages: {
-              required: "密码不能为空",
-            },
+              required: "密码不能为空"
+            }
           },
           {
             type: "submit",
-            label: "登录",
-          },
-        ],
-      },
+            label: "登录"
+          }
+        ]
+      }
     };
   },
   methods: {
     async submitHandler(e) {
       e.preventDefault(); //阻止默认事件
       try {
-        const result = await this.$http.get("/api/login", { params: this.model });
+        const result = await this.$http.get("/login", { params: this.model });
         if (result.code == 0) {
           this.$store.commit("setToken", result.token);
           window.localStorage.setItem("token", result.token);
@@ -80,8 +84,8 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

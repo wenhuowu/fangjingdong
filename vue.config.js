@@ -1,5 +1,5 @@
 module.exports = {
-  configureWebpack: {},
+  publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
   devServer: {
     public: "0.0.0.0:8081",
 
@@ -11,7 +11,7 @@ module.exports = {
         { username: "wenhuo", password: "123456" },
         { username: "nihoa", password: "123456" },
       ];
-      app.get("/api/register", (req, res) => {
+      app.get("/register", (req, res) => {
         const { username, password } = req.query;
         const userLenght = userpoor.filter((v) => v.username === username).length;
         if (userLenght > 0) {
@@ -28,7 +28,7 @@ module.exports = {
       });
       //登录接口
       let tokenkey = "xdclass";
-      app.get("/api/login", (req, res) => {
+      app.get("/login", (req, res) => {
         const { username, password } = req.query;
         if ((username == "jingdong" && password == "123456") || (username == "nihoa" && password == "123456")) {
           res.json({
@@ -45,7 +45,7 @@ module.exports = {
       });
 
       //轮播图接口
-      app.get("/api/slibe", (req, res) => {
+      app.get("/slibe", (req, res) => {
         res.json({
           data: [
             {
@@ -65,7 +65,7 @@ module.exports = {
       });
 
       //滚动分类接口
-      app.get("/api/rollinglist", (req, res) => {
+      app.get("/rollinglist", (req, res) => {
         res.json({
           data: [
             [
@@ -176,7 +176,7 @@ module.exports = {
         });
       });
       //获取分类页的分类接口
-      app.get("/api/classify", (req, res) => {
+      app.get("/classify", (req, res) => {
         switch (req.query.type) {
           case "0":
             res.json({
@@ -399,7 +399,7 @@ module.exports = {
         }
       });
       //瀑布流图片
-      app.get("/api/waterfull", (req, res) => {
+      app.get("/waterfull", (req, res) => {
         res.json({
           data: [
             {

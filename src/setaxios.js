@@ -6,6 +6,7 @@ export default function setAxios() {
   axios.interceptors.request.use((config) => {
     if (store.state.token) {
       config.headers.token = store.state.token;
+      console.log(11);
     }
     return config;
   });
@@ -13,6 +14,7 @@ export default function setAxios() {
   axios.interceptors.response.use((response) => {
     if (response.status === 200) {
       const data = response.data;
+      console.log(data, 22);
       if (data.code === -1) {
         store.commit("setToken", "");
         localStorage.removeItem("token");

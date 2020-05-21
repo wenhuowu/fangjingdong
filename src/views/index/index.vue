@@ -1,5 +1,5 @@
 <template>
-  <div id="index" ref="index" @scroll="scroll">
+  <div id="index" ref="index">
     <!-- 搜索框 -->
     <div class="header">
       <div class="header-content">
@@ -28,7 +28,7 @@
         :data="items"
         @change="changePage"
         :interval="2000"
-        :allow-vertical="true"
+        :options="options"
       >
         <cube-slide-item
           v-for="(item, index) in items"
@@ -59,10 +59,10 @@
       :data="list"
       @change="changePage"
       :auto-play="false"
+      :options="options"
       :loop="false"
       style="height:auto"
       reachBottomDistance="10"
-      :allow-vertical="true"
     >
       <cube-slide-item v-for="(list, index1) in list" :key="index1">
         <ul class="listul">
@@ -79,7 +79,7 @@
     <div id="box">
       <vue-waterfall-easy
         :imgsArr="imgsArr"
-        :maxCols="2"
+        :maxCols="5"
         @click="clickFn"
         @scrollReachBottom="getData"
       >
@@ -100,6 +100,7 @@
 
 <script>
 import vueWaterfallEasy from "vue-waterfall-easy";
+// import BScroll from "better-scroll";
 export default {
   data() {
     return {
@@ -107,7 +108,10 @@ export default {
       items: [],
       list: [],
       defaultWord: "",
-      hastoken: localStorage.getItem("token") ? false : true
+      hastoken: localStorage.getItem("token") ? false : true,
+      options: {
+        eventPassthrough: "vertical"
+      }
     };
   },
   components: {
@@ -115,14 +119,6 @@ export default {
   },
 
   methods: {
-    scroll(e) {
-      if (
-        e.srcElement.scrollTop + e.srcElement.offsetHeight >
-        e.srcElement.scrollHeight - 100
-      ) {
-        this.getData();
-      }
-    },
     onScroll() {
       //可滚动容器的高度
       let innerHeight = document.documentElement.scrollHeight;
@@ -155,7 +151,7 @@ export default {
     },
     getData() {
       this.$http
-        .get("/api/waterfull") // 真实环境中，后端会根据参数group返回新的图片数组，这里我用一个json文件模拟
+        .get("/waterfull") // 真实环境中，后端会根据参数group返回新的图片数组，这里我用一个json文件模拟
         .then(res => {
           res.data.forEach(v => {
             v.src = require(`../../assets/images/${v.src}.jpg`);
@@ -166,22 +162,27 @@ export default {
         });
     }
   },
-  //尝试监听滚动事件
-  // mounted() {
-  //   let innerHeight = document.querySelector("#index").scrollHeight;
-  //   let outerHeight = document.documentElement.clientHeight;
-  //   let scrollTop = document.documentElement.scrollTop;
-  //   console.log(innerHeight, scrollTop, outerHeight);
-  // },
+
+  mounted() {
+    //尝试监听滚动事件,节流
+    let x = null;
+    window.addEventListener("scroll", () => {
+      if (x) return;
+      x = setTimeout(() => {
+        this.onScroll();
+        x = null;
+      }, 300);
+    });
+  },
   async created() {
     this.getData();
     try {
-      const items = await this.$http.get("/api/slibe");
+      const items = await this.$http.get("/slibe");
       this.items = items.data;
       this.items.forEach(v => {
         v.image = require(`../../assets/upload/${v.image}.jpg`);
       });
-      const list = await this.$http.get("/api/rollinglist");
+      const list = await this.$http.get("/rollinglist");
       this.list = list.data;
       this.list[0].forEach(v => {
         v.image = require(`../../assets/upload/${v.image}.webp`);
@@ -198,8 +199,7 @@ export default {
 
 <style lang="stylus"  scoped>
 #index {
-  overflow: scroll;
-
+  // overflow: scroll;
   .cube-slide-dots {
     position: absolute;
     bottom: 5px;
@@ -298,6 +298,7 @@ export default {
 <style  >
 @import "../../assets/css/index.css";
 #box .vue-waterfall-easy-scroll {
-  position: static !important;
+  position: static;
+  overflow: hidden;
 }
 </style>
