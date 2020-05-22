@@ -26,23 +26,23 @@ module.exports = {
           });
         }
       });
-      //登录接口
-      let tokenkey = "xdclass";
-      app.get("/login", (req, res) => {
-        const { username, password } = req.query;
-        if ((username == "jingdong" && password == "123456") || (username == "nihoa" && password == "123456")) {
-          res.json({
-            code: 0,
-            message: "登录成功",
-            token: tokenkey + "-" + username + "-" + (new Date().getTime() + 60 * 60 * 1000),
-          });
-        } else {
-          res.json({
-            code: 1,
-            message: "用户名或密码不正确",
-          });
-        }
-      });
+      // //登录接口
+      // let tokenkey = "xdclass";
+      // app.get("/login", (req, res) => {
+      //   const { username, password } = req.query;
+      //   if ((username == "jingdong" && password == "123456") || (username == "nihoa" && password == "123456")) {
+      //     res.json({
+      //       code: 0,
+      //       message: "登录成功",
+      //       token: tokenkey + "-" + username + "-" + (new Date().getTime() + 60 * 60 * 1000),
+      //     });
+      //   } else {
+      //     res.json({
+      //       code: 1,
+      //       message: "用户名或密码不正确",
+      //     });
+      //   }
+      // });
 
       //轮播图接口
       // app.get("/slibe", (req, res) => {
