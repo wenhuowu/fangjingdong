@@ -11,7 +11,6 @@ export default function setAxios() {
   });
 
   axios.interceptors.response.use((response) => {
-    console.log(response);
     if (response.status === 200) {
       const data = response.data;
 
