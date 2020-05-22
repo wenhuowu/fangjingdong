@@ -200,6 +200,9 @@ export default {
 <style lang="stylus"  scoped>
 #index {
   // overflow: scroll;
+  .cube-slide{
+    touch-action: none;
+  }
   .cube-slide-dots {
     position: absolute;
     bottom: 5px;
